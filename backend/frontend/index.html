@@ -1,0 +1,156 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Trunk - Projetos Integradores</title>
+<link rel="stylesheet" href="style.css">
+</head>
+<body>
+<nav id="main-nav" class="hidden" style="background:#2c3e50;color:#fff;padding:12px 24px;display:flex;align-items:center;justify-content:space-between">
+<div style="font-weight:bold;font-size:1.3em">Trunk</div>
+<ul style="list-style:none;display:flex;gap:16px;margin:0">
+<li><a href="#" onclick="showSection('home')">Home</a></li>
+<li><a href="#" onclick="showSection('projects')">Projetos</a></li>
+<li><a href="#" onclick="showSection('contact')">Contato</a></li>
+<li><a href="help.html" target="_blank">Ajuda</a></li>
+<li><a href="#" onclick="logout()">Sair</a></li>
+</ul>
+</nav>
+
+<main style="max-width:900px;margin:0 auto;padding:24px">
+
+<section id="login-section">
+<div style="max-width:400px;margin:60px auto;text-align:center">
+<h2>Trunk</h2>
+<p style="color:#666">Gerenciamento de Projetos Integradores</p>
+<form id="login-form">
+<input type="email" id="login-email" placeholder="Email" required style="width:100%;padding:10px;margin:6px 0">
+<input type="password" id="login-senha" placeholder="Senha" required style="width:100%;padding:10px;margin:6px 0">
+<button type="submit" style="width:100%;padding:10px;background:#3498db;color:#fff;border:none">Entrar</button>
+</form>
+<p style="cursor:pointer;color:#3498db" onclick="showRegister()">Cadastre-se</p>
+<p style="cursor:pointer;color:#3498db" onclick="showRecuperar()">Esqueceu a senha?</p>
+<div id="login-error" style="color:red"></div>
+</div>
+</section>
+
+<section id="register-section" class="hidden" style="display:none">
+<div style="max-width:400px;margin:60px auto">
+<h2>Cadastro</h2>
+<form id="register-form">
+<input type="text" id="reg-nome" placeholder="Nome completo" required style="width:100%;padding:10px;margin:6px 0">
+<input type="email" id="reg-email" placeholder="Email" required style="width:100%;padding:10px;margin:6px 0">
+<input type="text" id="reg-curso" placeholder="Curso" style="width:100%;padding:10px;margin:6px 0">
+<input type="password" id="reg-senha" placeholder="Senha" required style="width:100%;padding:10px;margin:6px 0">
+<input type="text" id="reg-pergunta" placeholder="Pergunta de segurança" style="width:100%;padding:10px;margin:6px 0">
+<input type="text" id="reg-resposta" placeholder="Resposta" style="width:100%;padding:10px;margin:6px 0">
+<button type="submit" style="width:100%;padding:10px;background:#27ae60;color:#fff;border:none">Cadastrar</button>
+</form>
+<p style="cursor:pointer;color:#3498db" onclick="showSection('login')">Voltar</p>
+<div id="register-error" style="color:red"></div>
+</div>
+</section>
+
+<section id="recuperar-section" class="hidden" style="display:none">
+<div style="max-width:400px;margin:60px auto">
+<h2>Recuperar Senha</h2>
+<form id="recuperar-form">
+<input type="email" id="rec-email" placeholder="Email" required style="width:100%;padding:10px;margin:6px 0">
+<input type="text" id="rec-resposta" placeholder="Resposta de segurança" required style="width:100%;padding:10px;margin:6px 0">
+<input type="password" id="rec-nova-senha" placeholder="Nova senha" required style="width:100%;padding:10px;margin:6px 0">
+<button type="submit" style="width:100%;padding:10px;background:#e67e22;color:#fff;border:none">Redefinir</button>
+</form>
+<p style="cursor:pointer;color:#3498db" onclick="showSection('login')">Voltar</p>
+<div id="recuperar-error" style="color:red"></div>
+</div>
+</section>
+
+<section id="home-section" class="hidden" style="display:none">
+<h1>Bem-vindo ao Trunk</h1>
+<p style="color:#666">Sistema de Gerenciamento de Projetos Integradores</p>
+<div style="display:grid;grid-template-columns:1fr 1fr 1fr;gap:16px;margin-top:24px">
+<div onclick="showSection('projects')" style="border:1px solid #ddd;border-radius:8px;padding:24px;cursor:pointer;text-align:center">
+<h3>Projetos</h3>
+<p style="color:#666">Gerenciar projetos</p>
+</div>
+<div onclick="showSection('contact')" style="border:1px solid #ddd;border-radius:8px;padding:24px;cursor:pointer;text-align:center">
+<h3>Contato</h3>
+<p style="color:#666">Suporte e dúvidas</p>
+</div>
+<div onclick="window.open('help.html','_blank')" style="border:1px solid #ddd;border-radius:8px;padding:24px;cursor:pointer;text-align:center">
+<h3>Ajuda</h3>
+<p style="color:#666">Manual do sistema</p>
+</div>
+</div>
+</section>
+
+<section id="projects-section" class="hidden" style="display:none">
+<div style="display:flex;justify-content:space-between;align-items:center">
+<h1>Projetos</h1>
+<button onclick="showProjectForm()" style="padding:10px 20px;background:#3498db;color:#fff;border:none">+ Novo</button>
+</div>
+<div style="display:flex;gap:8px;margin:12px 0">
+<input type="text" id="filter-titulo" placeholder="Buscar por título..." oninput="renderProjects()" style="flex:1;padding:8px">
+<select id="filter-status" onchange="renderProjects()" style="padding:8px">
+<option value="">Todos</option>
+<option value="em-desenvolvimento">Em Desenvolvimento</option>
+<option value="entregue">Entregue</option>
+<option value="avaliado">Avaliado</option>
+<option value="arquivado">Arquivado</option>
+</select>
+</div>
+<table style="width:100%;border-collapse:collapse">
+<thead><tr style="background:#f5f5f5"><th style="padding:10px;text-align:left">Título</th><th style="padding:10px;text-align:left">Status</th><th style="padding:10px;text-align:left">Ações</th></tr></thead>
+<tbody id="projects-tbody"></tbody>
+</table>
+</section>
+
+<section id="project-form-section" class="hidden" style="display:none">
+<h1 id="project-form-title">Novo Projeto</h1>
+<form id="project-form">
+<input type="hidden" id="pf-id">
+<label>Título</label><input type="text" id="pf-titulo" required style="width:100%;padding:8px;margin:4px 0">
+<label>Resumo</label><textarea id="pf-resumo" rows="3" style="width:100%;padding:8px;margin:4px 0"></textarea>
+<label>Período</label><input type="text" id="pf-periodo" placeholder="Ex: 2026.1" style="width:100%;padding:8px;margin:4px 0">
+<label>Equipe</label><input type="text" id="pf-equipe" placeholder="Nomes separados por vírgula" style="width:100%;padding:8px;margin:4px 0">
+<label>Status</label>
+<select id="pf-status" style="width:100%;padding:8px;margin:4px 0">
+<option value="em-desenvolvimento">Em Desenvolvimento</option>
+<option value="entregue">Entregue</option>
+<option value="avaliado">Avaliado</option>
+<option value="arquivado">Arquivado</option>
+</select>
+<div style="display:flex;gap:8px;margin-top:12px">
+<button type="submit" style="padding:10px 20px;background:#3498db;color:#fff;border:none">Salvar</button>
+<button type="button" onclick="showSection('projects')" style="padding:10px 20px;background:#95a5a6;color:#fff;border:none">Cancelar</button>
+</div>
+<div id="project-form-error" style="color:red"></div>
+</form>
+</section>
+
+<section id="project-detail-section" class="hidden" style="display:none">
+<div id="detail-content"></div>
+<button onclick="showSection('projects')" style="margin-top:12px;padding:10px 20px;background:#95a5a6;color:#fff;border:none">Voltar</button>
+</section>
+
+<section id="contact-section" class="hidden" style="display:none">
+<h1>Contato</h1>
+<form id="contact-form">
+<input type="text" id="ct-nome" placeholder="Nome" required style="width:100%;padding:8px;margin:4px 0">
+<input type="email" id="ct-email" placeholder="Email" required style="width:100%;padding:8px;margin:4px 0">
+<input type="text" id="ct-assunto" placeholder="Assunto" required style="width:100%;padding:8px;margin:4px 0">
+<textarea id="ct-mensagem" rows="4" placeholder="Mensagem" required style="width:100%;padding:8px;margin:4px 0"></textarea>
+<button type="submit" style="padding:10px 20px;background:#27ae60;color:#fff;border:none">Enviar</button>
+</form>
+<div id="contact-success" class="hidden" style="color:green;display:none">Mensagem enviada!</div>
+</section>
+</main>
+
+<footer style="text-align:center;padding:24px;color:#999;font-size:0.9em">
+Trunk - Projeto Integrador &copy; 2026
+</footer>
+
+<script src="app.js"></script>
+</body>
+</html>

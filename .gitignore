@@ -1,0 +1,51 @@
+# --- Python ---
+__pycache__/
+*.py[cod]
+*.pyo
+*.egg-info/
+dist/
+build/
+*.egg
+.eggs/
+*.whl
+
+# --- Virtual environment ---
+venv/
+.venv/
+env/
+.env/
+
+# --- IDE / Editor ---
+.vscode/
+.idea/
+*.swp
+*.swo
+*~
+.DS_Store
+Thumbs.db
+
+# --- Environment variables ---
+.env
+.env.local
+*.env
+
+# --- Database ---
+backend/*.sqlite3
+backend/*.db
+backend/*.sqlite
+
+# --- Uploads ---
+backend/uploads/
+!backend/uploads/.gitkeep
+
+# --- Tests / Cache ---
+.pytest_cache/
+.mypy_cache/
+.ruff_cache/
+
+# --- Projeto Integrador Requisitos ---
+docs/Projeto Integrador Requisitos/
+Projeto Integrador Requisitos.docx
+
+# --- Logs ---
+*.log

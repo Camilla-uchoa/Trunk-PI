@@ -1,0 +1,7 @@
+body{font-family:"Segoe UI",sans-serif;margin:0;background:#fafafa;color:#333}
+a{color:#3498db;text-decoration:none}
+.hidden{display:none}
+table td,table th{padding:10px;border-bottom:1px solid #eee}
+button{cursor:pointer;border-radius:4px}
+.error-msg{color:#e74c3c;margin-top:8px}
+.success-msg{color:#27ae60;margin-top:8px}
